@@ -8,8 +8,8 @@ namespace Werkcollege03.Oef03.Models
     public class Student
     {
         public int ID { get; set; }
-        public int Naam { get; set; }
-        public virtual IDictionary<Vak, int> Punten { get; set; }
+        public string Naam { get; set; }
+        public virtual ICollection<Punt> Punten { get; set; }
 
     }
 }
