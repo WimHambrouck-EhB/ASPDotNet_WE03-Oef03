@@ -9,5 +9,8 @@ namespace Werkcollege03.Oef03.Models
         public Vak Vak { get; set; }
         [Range(0, 20)]
         public int Score { get; set; }
+        [NotMapped]
+        [DisplayFormat(DataFormatString = "{0}%")]
+        public int ScoreProcent => Score * 5;
     }
 }

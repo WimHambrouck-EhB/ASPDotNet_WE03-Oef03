@@ -38,7 +38,7 @@
                     <tr>
                         <td></td>
                         <td>
-                            @punt.Vak.Naam - @punt.Score / 20 (@(punt.Score * 5)%)
+                            @punt.Vak.Naam - @punt.Score / 20 (@Html.DisplayFor(puntItem => punt.ScoreProcent))
                         </td>
                         <td>
                             <a asp-action="Edit" asp-route-id="@punt.ID">Edit</a> |
