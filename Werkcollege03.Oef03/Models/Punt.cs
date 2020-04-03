@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Werkcollege03.Oef03.Models
 {
@@ -8,6 +9,5 @@ namespace Werkcollege03.Oef03.Models
         public Vak Vak { get; set; }
         [Range(0, 20)]
         public int Score { get; set; }
-
     }
 }

@@ -22,7 +22,8 @@ namespace Werkcollege03.Oef03.Controllers
         // GET: Punten
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Punten.ToListAsync());
+            var studenten = _context.Studenten.Include(s => s.Punten).ThenInclude(p => p.Vak);
+            return View(await studenten.ToListAsync());
         }
 
         // GET: Punten/Details/5
@@ -37,6 +38,7 @@ namespace Werkcollege03.Oef03.Controllers
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (punt == null)
             {
+
                 return NotFound();
             }
 

@@ -16,9 +16,10 @@ namespace Werkcollege03.Oef03.Data
             {
                 context.Vakken.AddRange(new Vak[]
                 {
-                    new Vak { Naam = ".NET Advanced" },
-                    new Vak { Naam = "Data Advanced" },
-
+                    new Vak { Naam = "Programming Essentials" },
+                    new Vak { Naam = "Programming Advanced" },
+                    new Vak { Naam = "Data Essentials" },
+                    new Vak { Naam = "Data Advanced" }
                 });
             }
 
@@ -37,11 +38,17 @@ namespace Werkcollege03.Oef03.Data
                             new Punt {
                                 Score = 20,
                                 Vak = new Vak { Naam = ".NET Essentials" }
+                            },
+                            new Punt
+                            {
+                                Score = 20,
+                                Vak = new Vak { Naam = ".NET Advanced" }
                             }
                         }
                     }
                 });
             }
+
 
 
             context.SaveChanges();

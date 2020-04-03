@@ -9,6 +9,6 @@ namespace Werkcollege03.Oef03.Models
     {
         public int ID { get; set; }
         public string Naam { get; set; }
-        public ICollection<Punt> Punten { get; set; }
+        public virtual ICollection<Punt> Punten { get; set; }
     }
 }

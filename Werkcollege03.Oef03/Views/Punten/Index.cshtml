@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Werkcollege03.Oef03.Models.Punt>
+﻿@model IEnumerable<Student>
 
 @{
     ViewData["Title"] = "Punten";
@@ -13,23 +13,41 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Score)
+                @Html.DisplayNameFor(model => model.Naam)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Punten)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Score)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            if (item.Punten.Any())
+            {
+                <tr class="active">
+                    <td colspan="3">
+                        @Html.DisplayFor(modelItem => item.Naam)
+                    </td>
+                </tr>
+
+                @foreach (var punt in item.Punten)
+                {
+                    <tr>
+                        <td></td>
+                        <td>
+                            @punt.Vak.Naam - @punt.Score / 20 (@(punt.Score * 5)%)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@punt.ID">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@punt.ID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@punt.ID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+        }
     </tbody>
 </table>
