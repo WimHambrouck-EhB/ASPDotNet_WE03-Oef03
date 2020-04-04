@@ -120,7 +120,8 @@ namespace Werkcollege03.Oef03.Controllers
                 return NotFound();
             }
 
-
+            punt.Student = await _context.FindAsync<Student>(punt.StudentID);
+            punt.Vak = await _context.FindAsync<Vak>(punt.VakID);
             return View(punt);
         }
 
