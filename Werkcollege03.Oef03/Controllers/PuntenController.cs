@@ -65,9 +65,9 @@ namespace Werkcollege03.Oef03.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            var model = await NewPuntViewModel();
-            model.Punt = punt;
-            return View(model);
+            var viewModel = await NewPuntViewModel();
+            viewModel.Punt = punt;
+            return View(viewModel);
         }
 
         private async Task<PuntViewModel> NewPuntViewModel()
@@ -93,7 +93,9 @@ namespace Werkcollege03.Oef03.Controllers
                 return NotFound();
             }
 
-            return View(punt);
+            var viewModel = await NewPuntViewModel();
+            viewModel.Punt = punt;
+            return View(viewModel);
         }
 
         // POST: Punten/Edit/5
@@ -101,7 +103,7 @@ namespace Werkcollege03.Oef03.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Score")] Punt punt)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Score,VakID,StudentID")] Punt punt)
         {
             if (id != punt.ID)
             {
