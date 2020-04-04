@@ -26,25 +26,6 @@ namespace Werkcollege03.Oef03.Controllers
             return View(await studenten.ToListAsync());
         }
 
-        // GET: Punten/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var punt = await _context.Punten
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (punt == null)
-            {
-
-                return NotFound();
-            }
-
-            return View(punt);
-        }
-
         // GET: Punten/Create
         public async Task<IActionResult> Create()
         {
@@ -68,15 +49,6 @@ namespace Werkcollege03.Oef03.Controllers
             var viewModel = await NewPuntViewModel();
             viewModel.Punt = punt;
             return View(viewModel);
-        }
-
-        private async Task<PuntViewModel> NewPuntViewModel()
-        {
-            return new PuntViewModel
-            {
-                Studenten = new SelectList(await _context.Studenten.ToListAsync(), nameof(Student.ID), nameof(Student.Naam)),
-                Vakken = new SelectList(await _context.Vakken.ToListAsync(), nameof(Vak.ID), nameof(Vak.Naam))
-            };
         }
 
         // GET: Punten/Edit/5
@@ -148,6 +120,7 @@ namespace Werkcollege03.Oef03.Controllers
                 return NotFound();
             }
 
+
             return View(punt);
         }
 
@@ -160,6 +133,15 @@ namespace Werkcollege03.Oef03.Controllers
             _context.Punten.Remove(punt);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        private async Task<PuntViewModel> NewPuntViewModel()
+        {
+            return new PuntViewModel
+            {
+                Studenten = new SelectList(await _context.Studenten.ToListAsync(), nameof(Student.ID), nameof(Student.Naam)),
+                Vakken = new SelectList(await _context.Vakken.ToListAsync(), nameof(Vak.ID), nameof(Vak.Naam))
+            };
         }
 
         private bool PuntExists(int id)

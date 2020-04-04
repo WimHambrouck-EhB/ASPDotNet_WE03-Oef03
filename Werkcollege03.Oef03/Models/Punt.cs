@@ -7,7 +7,8 @@ namespace Werkcollege03.Oef03.Models
     {
         public int ID { get; set; }
         public Vak Vak { get; set; }
-        
+        public Student Student { get; set; }
+
         [Display(Name = "Vak")]
         public int VakID { get; set; }
 
