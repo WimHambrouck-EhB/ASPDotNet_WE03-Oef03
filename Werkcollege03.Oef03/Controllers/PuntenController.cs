@@ -46,9 +46,9 @@ namespace Werkcollege03.Oef03.Controllers
         }
 
         // GET: Punten/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            return View(await NewPuntViewModel());
         }
 
         // POST: Punten/Create
@@ -56,7 +56,7 @@ namespace Werkcollege03.Oef03.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Score")] Punt punt)
+        public async Task<IActionResult> Create([Bind("VakID,StudentID,Score")] Punt punt)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,19 @@ namespace Werkcollege03.Oef03.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(punt);
+
+            var model = await NewPuntViewModel();
+            model.Punt = punt;
+            return View(model);
+        }
+
+        private async Task<PuntViewModel> NewPuntViewModel()
+        {
+            return new PuntViewModel
+            {
+                Studenten = new SelectList(await _context.Studenten.ToListAsync(), nameof(Student.ID), nameof(Student.Naam)),
+                Vakken = new SelectList(await _context.Vakken.ToListAsync(), nameof(Vak.ID), nameof(Vak.Naam))
+            };
         }
 
         // GET: Punten/Edit/5
@@ -80,6 +92,7 @@ namespace Werkcollege03.Oef03.Controllers
             {
                 return NotFound();
             }
+
             return View(punt);
         }
 

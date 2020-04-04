@@ -7,6 +7,18 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200402160100_VakId.cs" />
     <Compile Remove="Migrations\20200402160100_VakId.Designer.cs" />
+    <Compile Remove="Migrations\20200404152121_punt-ids.cs" />
+    <Compile Remove="Migrations\20200404152121_punt-ids.Designer.cs" />
+    <Compile Remove="Migrations\20200404153452_Score-int-naar-float.cs" />
+    <Compile Remove="Migrations\20200404153452_Score-int-naar-float.Designer.cs" />
+    <Compile Remove="Migrations\20200404153858_Score-int-naar-decimal.cs" />
+    <Compile Remove="Migrations\20200404153858_Score-int-naar-decimal.Designer.cs" />
+    <Compile Remove="Migrations\20200404154206_Score-int-naar-double.cs" />
+    <Compile Remove="Migrations\20200404154206_Score-int-naar-double.Designer.cs" />
+    <Compile Remove="Migrations\20200404160622_Score-int-naar-decimal.cs" />
+    <Compile Remove="Migrations\20200404160622_Score-int-naar-decimal.Designer.cs" />
+    <Compile Remove="Migrations\20200404160954_Score-int-naar-float.cs" />
+    <Compile Remove="Migrations\20200404160954_Score-int-naar-float.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
