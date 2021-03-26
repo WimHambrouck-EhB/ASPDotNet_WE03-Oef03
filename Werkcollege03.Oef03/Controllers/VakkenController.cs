@@ -10,22 +10,22 @@ using Werkcollege03.Oef03.Models;
 
 namespace Werkcollege03.Oef03.Controllers
 {
-    public class StudentenController : Controller
+    public class VakkenController : Controller
     {
         private readonly Werkcollege03Oef03Context _context;
 
-        public StudentenController(Werkcollege03Oef03Context context)
+        public VakkenController(Werkcollege03Oef03Context context)
         {
             _context = context;
         }
 
-        // GET: Studenten
+        // GET: Vakken
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Studenten.OrderBy(s => s.Naam).ToListAsync());
+            return View(await _context.Vakken.OrderBy(v => v.Semester).ThenBy(v => v.Naam).ToListAsync());
         }
 
-        // GET: Studenten/Details/5
+        // GET: Vakken/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace Werkcollege03.Oef03.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Studenten
+            var vak = await _context.Vakken
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (student == null)
+            if (vak == null)
             {
                 return NotFound();
             }
 
-            return View(student);
+            return View(vak);
         }
 
-        // GET: Studenten/Create
+        // GET: Vakken/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Studenten/Create
+        // POST: Vakken/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Naam")] Student student)
+        public async Task<IActionResult> Create([Bind("ID,Naam")] Vak vak)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(student);
+                _context.Add(vak);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(student);
+            return View(vak);
         }
 
-        // GET: Studenten/Edit/5
+        // GET: Vakken/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace Werkcollege03.Oef03.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Studenten.FindAsync(id);
-            if (student == null)
+            var vak = await _context.Vakken.FindAsync(id);
+            if (vak == null)
             {
                 return NotFound();
             }
-            return View(student);
+            return View(vak);
         }
 
-        // POST: Studenten/Edit/5
+        // POST: Vakken/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Naam")] Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Naam")] Vak vak)
         {
-            if (id != student.ID)
+            if (id != vak.ID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Werkcollege03.Oef03.Controllers
             {
                 try
                 {
-                    _context.Update(student);
+                    _context.Update(vak);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StudentExists(student.ID))
+                    if (!VakExists(vak.ID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace Werkcollege03.Oef03.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(student);
+            return View(vak);
         }
 
-        // GET: Studenten/Delete/5
+        // GET: Vakken/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace Werkcollege03.Oef03.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Studenten
+            var vak = await _context.Vakken
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (student == null)
+            if (vak == null)
             {
                 return NotFound();
             }
 
-            return View(student);
+            return View(vak);
         }
 
-        // POST: Studenten/Delete/5
+        // POST: Vakken/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var student = await _context.Studenten.FindAsync(id);
-            _context.Studenten.Remove(student);
+            var vak = await _context.Vakken.FindAsync(id);
+            _context.Vakken.Remove(vak);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StudentExists(int id)
+        private bool VakExists(int id)
         {
-            return _context.Studenten.Any(e => e.ID == id);
+            return _context.Vakken.Any(e => e.ID == id);
         }
     }
 }
