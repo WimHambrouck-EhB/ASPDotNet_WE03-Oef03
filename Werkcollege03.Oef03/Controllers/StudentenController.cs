@@ -22,7 +22,7 @@ namespace Werkcollege03.Oef03.Controllers
         // GET: Studenten
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Student.ToListAsync());
+            return View(await _context.Studenten.ToListAsync());
         }
 
         // GET: Studenten/Details/5
@@ -33,7 +33,7 @@ namespace Werkcollege03.Oef03.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Student
+            var student = await _context.Studenten
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (student == null)
             {
@@ -73,7 +73,7 @@ namespace Werkcollege03.Oef03.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Student.FindAsync(id);
+            var student = await _context.Studenten.FindAsync(id);
             if (student == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace Werkcollege03.Oef03.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Student
+            var student = await _context.Studenten
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (student == null)
             {
@@ -139,15 +139,15 @@ namespace Werkcollege03.Oef03.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var student = await _context.Student.FindAsync(id);
-            _context.Student.Remove(student);
+            var student = await _context.Studenten.FindAsync(id);
+            _context.Studenten.Remove(student);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool StudentExists(int id)
         {
-            return _context.Student.Any(e => e.ID == id);
+            return _context.Studenten.Any(e => e.ID == id);
         }
     }
 }

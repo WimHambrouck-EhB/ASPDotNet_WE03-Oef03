@@ -14,6 +14,9 @@ namespace Werkcollege03.Oef03.Data
         {
         }
 
-        public DbSet<Werkcollege03.Oef03.Models.Student> Student { get; set; }
+        public DbSet<Student> Studenten { get; set; }
+        public DbSet<Vak> Vakken { get; set; }
+        public DbSet<Punt> Punten { get; set; }
+
     }
 }
