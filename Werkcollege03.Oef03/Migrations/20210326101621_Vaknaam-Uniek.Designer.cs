@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Werkcollege03.Oef03.Data;
 
 namespace Werkcollege03.Oef03.Migrations
 {
     [DbContext(typeof(Werkcollege03Oef03Context))]
-    partial class Werkcollege03Oef03ContextModelSnapshot : ModelSnapshot
+    [Migration("20210326101621_Vaknaam-Uniek")]
+    partial class VaknaamUniek
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
