@@ -10,7 +10,7 @@ namespace Werkcollege03.Oef03.Data
     {
         public static void Initialize(Werkcollege03Oef03Context context)
         {
-            context.Database.EnsureDeleted();
+            //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             if (!context.Vakken.Any())
