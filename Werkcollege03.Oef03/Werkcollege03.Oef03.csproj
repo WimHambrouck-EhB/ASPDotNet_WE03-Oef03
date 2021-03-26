@@ -8,6 +8,10 @@
   <ItemGroup>
     <Compile Remove="Migrations\20210326101345_Vaknaam-Uniek.cs" />
     <Compile Remove="Migrations\20210326101345_Vaknaam-Uniek.Designer.cs" />
+    <Compile Remove="Migrations\20210326102836_Semester-voor-ordering.cs" />
+    <Compile Remove="Migrations\20210326102836_Semester-voor-ordering.Designer.cs" />
+    <Compile Remove="Migrations\20210326103020_Semester-voor-ordering.cs" />
+    <Compile Remove="Migrations\20210326103020_Semester-voor-ordering.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

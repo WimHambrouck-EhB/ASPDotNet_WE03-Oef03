@@ -10,7 +10,5 @@ namespace Werkcollege03.Oef03.Models
     {
         public int ID { get; set; }
         public string Naam { get; set; }
-        [ScaffoldColumn(false)]
-        public int Semester { get; set; }
     }
 }

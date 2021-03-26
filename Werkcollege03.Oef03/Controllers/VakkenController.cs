@@ -22,7 +22,7 @@ namespace Werkcollege03.Oef03.Controllers
         // GET: Vakken
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Vakken.OrderBy(v => v.Semester).ThenBy(v => v.Naam).ToListAsync());
+            return View(await _context.Vakken.ToListAsync());
         }
 
         // GET: Vakken/Details/5

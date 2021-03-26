@@ -10,19 +10,19 @@ namespace Werkcollege03.Oef03.Data
     {
         public static void Initialize(Werkcollege03Oef03Context context)
         {
-            //context.Database.EnsureDeleted();
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             if (!context.Vakken.Any())
             {
                 context.AddRange(new Vak[]
                 {
-                    new Vak { Naam = ".NET Essentials", Semester = 3 },
-                    new Vak { Naam = ".NET Advanced", Semester = 4 },
-                    new Vak { Naam = "Programming Essentials", Semester = 1 },
-                    new Vak { Naam = "Programming Advanced", Semester = 2 },
-                    new Vak { Naam = "Data Essentials", Semester = 2 },
-                    new Vak { Naam = "Data Advanced", Semester = 3 }
+                    new Vak { Naam = ".NET Essentials" },
+                    new Vak { Naam = ".NET Advanced" },
+                    new Vak { Naam = "Programming Essentials" },
+                    new Vak { Naam = "Programming Advanced" },
+                    new Vak { Naam = "Data Essentials" },
+                    new Vak { Naam = "Data Advanced" }
                 });
 
                 context.SaveChanges();
