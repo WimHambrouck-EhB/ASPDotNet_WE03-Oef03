@@ -1,10 +1,10 @@
-﻿@model PuntViewModel
+﻿@model Werkcollege03.Oef03.Models.Punt
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit</h2>
+<h1>Edit</h1>
 
 <h4>Punt</h4>
 <hr />
@@ -12,28 +12,24 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Punt.ID" />
+            <input type="hidden" asp-for="ID" />
             <div class="form-group">
-                <label asp-for="Punt.StudentID" class="control-label"></label>
-                <select asp-for="Punt.StudentID" class="form-control" asp-items="Model.Studenten">
-                    <option selected="selected">Kies student...</option>
-                </select>
-                <span asp-validation-for="Punt.StudentID" class="text-danger"></span>
+                <label asp-for="VakID" class="control-label"></label>
+                <select asp-for="VakID" class="form-control" asp-items="ViewBag.VakID"></select>
+                <span asp-validation-for="VakID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Punt.VakID" class="control-label"></label>
-                <select asp-for="Punt.VakID" class="form-control" asp-items="Model.Vakken">
-                    <option selected="selected">Kies vak...</option>
-                </select>
-                <span asp-validation-for="Punt.VakID" class="text-danger"></span>
+                <label asp-for="StudentID" class="control-label"></label>
+                <select asp-for="StudentID" class="form-control" asp-items="ViewBag.StudentID"></select>
+                <span asp-validation-for="StudentID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Punt.Score" class="control-label"></label>
-                <input asp-for="Punt.Score" class="form-control" />
-                <span asp-validation-for="Punt.Score" class="text-danger"></span>
+                <label asp-for="Score" class="control-label"></label>
+                <input asp-for="Score" class="form-control" />
+                <span asp-validation-for="Score" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Werkcollege03.Oef03.Data;
 
 namespace Werkcollege03.Oef03
@@ -17,7 +16,7 @@ namespace Werkcollege03.Oef03
     {
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args).Build();
+            var host = CreateHostBuilder(args).Build();
 
             using (var scope = host.Services.CreateScope())
             {
@@ -26,7 +25,7 @@ namespace Werkcollege03.Oef03
                 try
                 {
                     var context = services.GetRequiredService<Werkcollege03Oef03Context>();
-                    context.Database.Migrate();
+                    // context.Database.Migrate();
                     SeedData.Initialize(context);
                 }
                 catch (Exception ex)
@@ -39,8 +38,11 @@ namespace Werkcollege03.Oef03
             host.Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 }

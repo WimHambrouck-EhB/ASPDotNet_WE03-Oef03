@@ -1,10 +1,10 @@
-﻿@model PuntViewModel
+﻿@model Werkcollege03.Oef03.Models.Punt
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+<h1>Create</h1>
 
 <h4>Punt</h4>
 <hr />
@@ -13,26 +13,20 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Punt.StudentID" class="control-label"></label>
-                <select asp-for="Punt.StudentID" class="form-control" asp-items="Model.Studenten">
-                    <option selected="selected">Kies student...</option>
-                </select>
-                <span asp-validation-for="Punt.StudentID" class="text-danger"></span>
+                <label asp-for="VakID" class="control-label"></label>
+                <select asp-for="VakID" class ="form-control" asp-items="ViewBag.VakID"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Punt.VakID" class="control-label"></label>
-                <select asp-for="Punt.VakID" class="form-control" asp-items="Model.Vakken">
-                    <option selected="selected">Kies vak...</option>
-                </select>
-                <span asp-validation-for="Punt.VakID" class="text-danger"></span>
+                <label asp-for="StudentID" class="control-label"></label>
+                <select asp-for="StudentID" class ="form-control" asp-items="ViewBag.StudentID"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Punt.Score" class="control-label"></label>
-                <input asp-for="Punt.Score" class="form-control" />
-                <span asp-validation-for="Punt.Score" class="text-danger"></span>
+                <label asp-for="Score" class="control-label"></label>
+                <input asp-for="Score" class="form-control" />
+                <span asp-validation-for="Score" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>

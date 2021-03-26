@@ -19,13 +19,13 @@ namespace Werkcollege03.Oef03.Controllers
             _context = context;
         }
 
-        // GET: Student
+        // GET: Studenten
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Studenten.ToListAsync());
+            return View(await _context.Studenten.OrderBy(s => s.Naam).ToListAsync());
         }
 
-        // GET: Student/Details/5
+        // GET: Studenten/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,15 +43,15 @@ namespace Werkcollege03.Oef03.Controllers
             return View(student);
         }
 
-        // GET: Student/Create
+        // GET: Studenten/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Student/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Studenten/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Naam")] Student student)
@@ -65,7 +65,7 @@ namespace Werkcollege03.Oef03.Controllers
             return View(student);
         }
 
-        // GET: Student/Edit/5
+        // GET: Studenten/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,9 +81,9 @@ namespace Werkcollege03.Oef03.Controllers
             return View(student);
         }
 
-        // POST: Student/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Studenten/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Naam")] Student student)
@@ -116,7 +116,7 @@ namespace Werkcollege03.Oef03.Controllers
             return View(student);
         }
 
-        // GET: Student/Delete/5
+        // GET: Studenten/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +134,7 @@ namespace Werkcollege03.Oef03.Controllers
             return View(student);
         }
 
-        // POST: Student/Delete/5
+        // POST: Studenten/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

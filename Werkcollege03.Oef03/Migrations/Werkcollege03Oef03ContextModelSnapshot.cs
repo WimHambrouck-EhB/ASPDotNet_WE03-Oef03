@@ -14,7 +14,7 @@ namespace Werkcollege03.Oef03.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
+                .HasAnnotation("ProductVersion", "3.1.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -22,13 +22,17 @@ namespace Werkcollege03.Oef03.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Score");
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
 
-                    b.Property<int>("StudentID");
+                    b.Property<int>("StudentID")
+                        .HasColumnType("int");
 
-                    b.Property<int>("VakID");
+                    b.Property<int>("VakID")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -43,9 +47,11 @@ namespace Werkcollege03.Oef03.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Naam");
+                    b.Property<string>("Naam")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
@@ -56,26 +62,34 @@ namespace Werkcollege03.Oef03.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Naam");
+                    b.Property<string>("Naam")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("Naam")
+                        .IsUnique()
+                        .HasFilter("[Naam] IS NOT NULL");
 
                     b.ToTable("Vakken");
                 });
 
             modelBuilder.Entity("Werkcollege03.Oef03.Models.Punt", b =>
                 {
-                    b.HasOne("Werkcollege03.Oef03.Models.Student")
+                    b.HasOne("Werkcollege03.Oef03.Models.Student", "Student")
                         .WithMany("Punten")
                         .HasForeignKey("StudentID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Werkcollege03.Oef03.Models.Vak", "Vak")
                         .WithMany()
                         .HasForeignKey("VakID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -1,30 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200402160100_VakId.cs" />
-    <Compile Remove="Migrations\20200402160100_VakId.Designer.cs" />
-    <Compile Remove="Migrations\20200404152121_punt-ids.cs" />
-    <Compile Remove="Migrations\20200404152121_punt-ids.Designer.cs" />
-    <Compile Remove="Migrations\20200404153452_Score-int-naar-float.cs" />
-    <Compile Remove="Migrations\20200404153452_Score-int-naar-float.Designer.cs" />
-    <Compile Remove="Migrations\20200404153858_Score-int-naar-decimal.cs" />
-    <Compile Remove="Migrations\20200404153858_Score-int-naar-decimal.Designer.cs" />
-    <Compile Remove="Migrations\20200404154206_Score-int-naar-double.cs" />
-    <Compile Remove="Migrations\20200404154206_Score-int-naar-double.Designer.cs" />
-    <Compile Remove="Migrations\20200404160622_Score-int-naar-decimal.cs" />
-    <Compile Remove="Migrations\20200404160622_Score-int-naar-decimal.Designer.cs" />
-    <Compile Remove="Migrations\20200404160954_Score-int-naar-float.cs" />
-    <Compile Remove="Migrations\20200404160954_Score-int-naar-float.Designer.cs" />
+    <Compile Remove="Migrations\20210326101345_Vaknaam-Uniek.cs" />
+    <Compile Remove="Migrations\20210326101345_Vaknaam-Uniek.Designer.cs" />
+    <Compile Remove="Migrations\20210326102836_Semester-voor-ordering.cs" />
+    <Compile Remove="Migrations\20210326102836_Semester-voor-ordering.Designer.cs" />
+    <Compile Remove="Migrations\20210326103020_Semester-voor-ordering.cs" />
+    <Compile Remove="Migrations\20210326103020_Semester-voor-ordering.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
 
 </Project>

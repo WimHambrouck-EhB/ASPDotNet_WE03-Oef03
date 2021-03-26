@@ -22,22 +22,44 @@ namespace Werkcollege03.Oef03.Controllers
         // GET: Punten
         public async Task<IActionResult> Index()
         {
-            var studenten = _context.Studenten.Include(s => s.Punten).ThenInclude(p => p.Vak);
-            return View(await studenten.ToListAsync());
+            var studentenMetPunten = _context.Studenten.Include(s => s.Punten).ThenInclude(p => p.Vak);
+            return View(await studentenMetPunten.ToListAsync());
+        }
+
+        // GET: Punten/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var punt = await _context.Punten
+                .Include(p => p.Student)
+                .Include(p => p.Vak)
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (punt == null)
+            {
+                return NotFound();
+            }
+
+            return View(punt);
         }
 
         // GET: Punten/Create
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            return View(await NewPuntViewModel());
+            ViewData["StudentID"] = new SelectList(_context.Studenten.OrderBy(s => s.Naam), nameof(Student.ID), nameof(Student.Naam));
+            ViewData["VakID"] = new SelectList(_context.Vakken.OrderBy(v => v.Naam), nameof(Vak.ID), nameof(Vak.Naam));
+            return View();
         }
 
         // POST: Punten/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VakID,StudentID,Score")] Punt punt)
+        public async Task<IActionResult> Create([Bind("ID,VakID,StudentID,Score")] Punt punt)
         {
             if (ModelState.IsValid)
             {
@@ -45,10 +67,9 @@ namespace Werkcollege03.Oef03.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
-            var viewModel = await NewPuntViewModel();
-            viewModel.Punt = punt;
-            return View(viewModel);
+            ViewData["StudentID"] = new SelectList(_context.Studenten.OrderBy(s => s.Naam), nameof(Student.ID), nameof(Student.Naam), punt.StudentID);
+            ViewData["VakID"] = new SelectList(_context.Vakken.OrderBy(v => v.Naam), nameof(Vak.ID), nameof(Vak.Naam), punt.VakID);
+            return View(punt);
         }
 
         // GET: Punten/Edit/5
@@ -64,18 +85,17 @@ namespace Werkcollege03.Oef03.Controllers
             {
                 return NotFound();
             }
-
-            var viewModel = await NewPuntViewModel();
-            viewModel.Punt = punt;
-            return View(viewModel);
+            ViewData["StudentID"] = new SelectList(_context.Studenten.OrderBy(s => s.Naam), nameof(Student.ID), nameof(Student.Naam), punt.StudentID);
+            ViewData["VakID"] = new SelectList(_context.Vakken.OrderBy(v => v.Naam), nameof(Vak.ID), nameof(Vak.Naam), punt.VakID);
+            return View(punt);
         }
 
         // POST: Punten/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Score,VakID,StudentID")] Punt punt)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,VakID,StudentID,Score")] Punt punt)
         {
             if (id != punt.ID)
             {
@@ -102,6 +122,8 @@ namespace Werkcollege03.Oef03.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["StudentID"] = new SelectList(_context.Studenten.OrderBy(s => s.Naam), nameof(Student.ID), nameof(Student.Naam), punt.StudentID);
+            ViewData["VakID"] = new SelectList(_context.Vakken.OrderBy(v => v.Naam), nameof(Vak.ID), nameof(Vak.Naam), punt.VakID);
             return View(punt);
         }
 
@@ -114,14 +136,14 @@ namespace Werkcollege03.Oef03.Controllers
             }
 
             var punt = await _context.Punten
+                .Include(p => p.Student)
+                .Include(p => p.Vak)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (punt == null)
             {
                 return NotFound();
             }
 
-            punt.Student = await _context.FindAsync<Student>(punt.StudentID);
-            punt.Vak = await _context.FindAsync<Vak>(punt.VakID);
             return View(punt);
         }
 
@@ -134,15 +156,6 @@ namespace Werkcollege03.Oef03.Controllers
             _context.Punten.Remove(punt);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private async Task<PuntViewModel> NewPuntViewModel()
-        {
-            return new PuntViewModel
-            {
-                Studenten = new SelectList(await _context.Studenten.ToListAsync(), nameof(Student.ID), nameof(Student.Naam)),
-                Vakken = new SelectList(await _context.Vakken.ToListAsync(), nameof(Vak.ID), nameof(Vak.Naam))
-            };
         }
 
         private bool PuntExists(int id)
